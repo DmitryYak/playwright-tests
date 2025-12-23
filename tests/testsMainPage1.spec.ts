@@ -45,7 +45,6 @@ test.describe("check the main page", () => {
   });
 
   test(`check href elements of navigation header`, async ({ page }) => {
-    await page.goto(urlMain);
     await expect
       .soft(page.getByRole("link", { name: "Playwright logo Playwright" }))
       .toHaveAttribute("href", "/");
@@ -62,7 +61,6 @@ test.describe("check the main page", () => {
   });
 
   test(`check dark lite mode`, async ({ page }) => {
-    await page.goto(urlMain);
     await page.getByLabel("Switch between dark and light").click();
     await page.waitForTimeout(500);
     await expect
@@ -71,7 +69,6 @@ test.describe("check the main page", () => {
   });
 
   test(`check heading in the main page`, async ({ page }) => {
-    await page.goto(urlMain);
     await page;
     await expect
       .soft(page.getByRole("heading", { name: "Playwright enables reliable" }))
@@ -84,8 +81,6 @@ test.describe("check the main page", () => {
   });
 
   test(`check button Get started`, async ({ page }) => {
-    await page.goto(urlMain);
-
     await expect
       .soft(page.getByRole("link", { name: "Get started" }))
       .toBeVisible();
@@ -96,4 +91,28 @@ test.describe("check the main page", () => {
       .soft(page.getByRole("link", { name: "Get started" }))
       .toHaveAttribute("href", "/docs/intro");
   });
+
+  test.skip(`check skip`, async ({ page }) => {
+    await expect
+      .soft(page.getByRole("link", { name: "Get started" }))
+      .toBeVisible();
+  });
+
+  test.fixme(`check fixme`, async ({ page }) => {
+    await expect
+      .soft(page.getByRole("link", { name: "Get started" }))
+      .toBeVisible();
+  });
+
+  test.fail(`check fail`, async ({ page }) => {
+    await expect
+      .soft(page.getByRole("link", { name: "Get startedFFFFFF" }))
+      .toBeVisible();
+  });
+
+  // test.only(`check only --- Only this test`, async ({ page }) => {
+  //   await expect
+  //     .soft(page.getByRole("link", { name: "Get started" }))
+  //     .toBeVisible();
+  // });
 });
