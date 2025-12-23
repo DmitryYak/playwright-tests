@@ -6,9 +6,12 @@ test.describe("check the main page", () => {
     await page.goto(urlMain);
   });
   test("check navigation in header", async ({ page }) => {
-    await expect
-      .soft(page.getByRole("link", { name: "Playwright logo Playwright" }))
-      .toBeVisible();
+    test.step("check element navigation of header", async () => {
+      await expect
+        .soft(page.getByRole("link", { name: "Playwright logo Playwright" }))
+        .toBeVisible();
+    });
+
     await expect.soft(page.getByRole("link", { name: "Docs" })).toBeVisible();
     await expect.soft(page.getByRole("link", { name: "API" })).toBeVisible();
     await expect
