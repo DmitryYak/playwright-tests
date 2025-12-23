@@ -2,8 +2,10 @@ import { test, expect } from "@playwright/test";
 const urlMain = "https://playwright.dev/";
 
 test.describe("check the main page", () => {
-  test("check navigation in header", async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto(urlMain);
+  });
+  test("check navigation in header", async ({ page }) => {
     await expect
       .soft(page.getByRole("link", { name: "Playwright logo Playwright" }))
       .toBeVisible();
@@ -24,7 +26,6 @@ test.describe("check the main page", () => {
   });
 
   test(`check names elements`, async ({ page }) => {
-    await page.goto(urlMain);
     await expect
       .soft(page.getByRole("link", { name: "Playwright logo Playwright" }))
       .toContainText("Playwright");
