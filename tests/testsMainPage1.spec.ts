@@ -1,31 +1,57 @@
 import { test, expect } from "@playwright/test";
 const urlMain = "https://playwright.dev/";
 
+const elements = [
+  {
+    locator: (page) =>
+      page.getByRole("link", { name: "Playwright logo Playwright" }),
+  },
+  {
+    locator: (page) => page.getByRole("link", { name: "Docs" }),
+  },
+  {
+    locator: (page) => page.getByRole("link", { name: "API" }),
+  },
+  {
+    locator: (page) => page.getByRole("button", { name: "Node.js" }),
+  },
+  {
+    locator: (page) => page.getByRole("link", { name: "Community" }),
+  },
+  {
+    locator: (page) => page.getByRole("link", { name: "GitHub repository" }),
+  },
+  {
+    locator: (page) => page.getByRole("button", { name: "Search (Ctrl+K)" }),
+  },
+];
+
 test.describe("check the main page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(urlMain);
   });
+
   test("check navigation in header", async ({ page }) => {
-    test.step("check element navigation of header", async () => {
-      await expect
-        .soft(page.getByRole("link", { name: "Playwright logo Playwright" }))
-        .toBeVisible();
+    elements.forEach(({ locator }) => {
+      test.step("check element navigation of header", async () => {
+        await expect.soft(locator(page)).toBeVisible();
+      });
     });
 
-    await expect.soft(page.getByRole("link", { name: "Docs" })).toBeVisible();
-    await expect.soft(page.getByRole("link", { name: "API" })).toBeVisible();
-    await expect
-      .soft(page.getByRole("button", { name: "Node.js" }))
-      .toBeVisible();
-    await expect
-      .soft(page.getByRole("link", { name: "Community" }))
-      .toBeVisible();
-    await expect
-      .soft(page.getByRole("link", { name: "GitHub repository" }))
-      .toBeVisible();
-    await expect
-      .soft(page.getByRole("button", { name: "Search (Ctrl+K)" }))
-      .toBeVisible();
+    // await expect.soft(page.getByRole("link", { name: "Docs" })).toBeVisible();
+    // await expect.soft(page.getByRole("link", { name: "API" })).toBeVisible();
+    // await expect
+    //   .soft(page.getByRole("button", { name: "Node.js" }))
+    //   .toBeVisible();
+    // await expect
+    //   .soft(page.getByRole("link", { name: "Community" }))
+    //   .toBeVisible();
+    // await expect
+    //   .soft(page.getByRole("link", { name: "GitHub repository" }))
+    //   .toBeVisible();
+    // await expect
+    //   .soft(page.getByRole("button", { name: "Search (Ctrl+K)" }))
+    //   .toBeVisible();
   });
 
   test(`check names elements`, async ({ page }) => {
