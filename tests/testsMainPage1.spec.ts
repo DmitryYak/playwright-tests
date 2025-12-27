@@ -57,23 +57,28 @@ const elements: Elements[] = [
     },
   },
   {
-    locator: (page: Page): Locator =>
-      page.getByLabel("link", { name: "GitHub repository" }),
+    locator: (page: Page): Locator => page.getByLabel("GitHub repository"),
     name: "GitHub icon",
+    attribute: {
+      type: "href",
+      value: "https://github.com/microsoft/playwright",
+    },
   },
   {
-    locator: (page: Page): Locator =>
-      page.getByLabel("link", { name: "Discord server" }),
+    locator: (page: Page): Locator => page.getByLabel("Discord server"),
     name: "Discord icon",
+    attribute: {
+      type: "href",
+      value: "https://aka.ms/playwright/discord",
+    },
   },
   {
     locator: (page: Page): Locator =>
-      page.getByLabel("link", { name: "Switch between dark and light" }),
+      page.getByLabel("Switch between dark and light"),
     name: "Lightmode icon",
   },
   {
-    locator: (page: Page): Locator =>
-      page.getByLabel("button", { name: "Search (Ctrl+K)" }),
+    locator: (page: Page): Locator => page.getByLabel("Search (Ctrl+K)"),
     name: "Search input",
   },
   {
