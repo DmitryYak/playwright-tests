@@ -163,4 +163,14 @@ test.describe("check the main page", () => {
   //     .soft(page.getByRole("link", { name: "Get started" }))
   //     .toBeVisible();
   // });
+  const lightMods = ["ligth", "dark"];
+
+  lightMods.forEach((value) => {
+    test(`check stiles active ${value} mode`, async ({ page }) => {
+      await page.evaluate((value) => {
+        document.querySelector("html")?.setAttribute("data-theme", value);
+      }, value);
+      await expect(page).toHaveScreenshot(`pageWith ${value} Mode.png`);
+    });
+  });
 });
