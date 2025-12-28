@@ -1,4 +1,5 @@
 import { test, expect, Page, Locator } from "@playwright/test";
+import { MainPage } from "../models/MainPage";
 const urlMain = "https://playwright.dev/";
 
 interface Elements {
@@ -100,15 +101,13 @@ const elements: Elements[] = [
 
 test.describe("check the main page", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(urlMain);
+    // await page.goto(urlMain);
   });
 
   test("check navigation in header", async ({ page }) => {
-    for (const { locator, name } of elements) {
-      await test.step(`check element navigation of header ${name}`, async () => {
-        await expect.soft(locator(page)).toBeVisible();
-      });
-    }
+    const mainPage = new MainPage(page);
+    await mainPage.openMyPage();
+    await mainPage.checkElementsVisability();
   });
 
   test("check names elements", async ({ page }) => {
